@@ -4,6 +4,11 @@ from django.contrib.auth import get_user_model
 from .models import Event
 from .serializers import UserSerializer, EventSerializer
 from rest_framework import serializers
+from django.shortcuts import render
+
+def listTemplateView(request):
+    events = Event.objects.all()
+    return render(request, "events/index.html", {"events": events})
 
 class UserViewSet(viewsets.ModelViewSet):
     """
