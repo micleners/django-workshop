@@ -1,8 +1,8 @@
 from rest_framework import viewsets
 from django.contrib.auth.models import Group
 from django.contrib.auth import get_user_model
-from .models import Event
-from .serializers import UserSerializer, EventSerializer
+from .models import Event, Location
+from .serializers import UserSerializer, EventSerializer, LocationSerializer
 from rest_framework import serializers
 from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
@@ -60,3 +60,11 @@ class EventViewSet(viewsets.ModelViewSet):
     resource_name = 'events'
     queryset = Event.objects.all().order_by('-time')
     serializer_class = EventSerializer
+
+class LocationViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows groups to be viewed or edited.
+    """
+    resource_name = 'locations'
+    queryset = Location.objects.all().order_by('name')
+    serializer_class = LocationSerializer
