@@ -5,6 +5,42 @@ from .models import Event
 from .serializers import UserSerializer, EventSerializer
 from rest_framework import serializers
 from django.shortcuts import render
+from django.urls import reverse, reverse_lazy
+from django.views.generic import CreateView, DeleteView
+from django.http import HttpResponseRedirect
+
+class EventCreateView(CreateView):
+    template_name = "events/add.html"
+    model = Event
+    fields = ("title", "presenter", "description", "location", "time")
+
+def createTemplateView(request):
+    if request.POST["presenter"]:
+        presenter = get_user_model().objects.filter(pk=request.POST["presenter"])[0]
+    else:
+        presenter = request.user
+    event = Event.objects.create(
+        title=request.POST["title"],
+        presenter=presenter,
+        description=request.POST["description"],
+        location=request.POST["location"],
+    )
+    return HttpResponseRedirect(
+        reverse("events:list")
+    )
+    # want an extra challenge? Create a detail view
+    # and see if you can get this redirect response to work:
+    # return HttpResponseRedirect(
+    #     reverse("events:details", kwargs={"event_id": event.pk})
+    # )
+
+class EventDeleteView(DeleteView):
+    model = Event
+    success_url = reverse_lazy("events:list")
+
+    def get_object(self, queryset=None):
+        pk = self.request.POST["pk"]
+        return self.get_queryset().filter(pk=pk).get()
 
 def listTemplateView(request):
     events = Event.objects.all()

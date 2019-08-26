@@ -43,7 +43,10 @@ INSTALLED_APPS = [
     'events',
     # add `users` application to main project
     'users',
+    'crispy_forms', # new
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 AUTH_USER_MODEL = 'users.CustomUser' # assign custom model
 
