@@ -1,0 +1,15 @@
+{% extends 'base.html' %} {% block content %}
+  {% for event in events %}
+    <div class="card mb-3">
+      <div class="d-flex justify-content-between align-items-center card-header p-3 lead">
+        {{ event.title }}
+      </div>
+      <ul class="list-group list-group-flush list-group-item-action">
+        <li class="list-group-item p-1 pl-3">Who: {{ event.presenter }} </li>
+        <li class="list-group-item p-1 pl-3">What: {{ event.description }}</li>
+        <li class="list-group-item p-1 pl-3">Where: {{ event.location }}</li>
+        <li class="list-group-item p-1 pl-3">When: {{ event.time }}</li>
+      </ul>
+    </div>
+  {% endfor %}
+{% endblock %}

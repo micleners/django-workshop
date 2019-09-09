@@ -1,7 +1,15 @@
-from django.contrib.auth import get_user_model
 from rest_framework import viewsets
+from django.contrib.auth.models import Group
+from django.contrib.auth import get_user_model
 from .models import Event
 from .serializers import UserSerializer, EventSerializer
+from rest_framework import serializers
+from django.shortcuts import render  # new
+
+
+def listTemplateView(request):  # new
+    events = Event.objects.all()  # new
+    return render(request, "events/index.html", {"events": events})  # new
 
 
 class UserViewSet(viewsets.ModelViewSet):
