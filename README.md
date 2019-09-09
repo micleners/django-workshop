@@ -2,7 +2,7 @@
 # Django Workshop
 ## Level 2: Custom Auth, Advanced Views, Templates and Heroku Deploy
 
-<p style="font-size:50px; line-height:54px">Section 1: Main Workshop</p>
+# <a href="https://github.com/micleners/django-workshop/tree/level-2-custom-auth-and-deploy#7---command-line-inspection-of-model-objects-vs-serialized-objects">Jump to Section 7</a>
 
 # 1 - Backend Startup
 
